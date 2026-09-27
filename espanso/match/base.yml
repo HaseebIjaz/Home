@@ -1,0 +1,146 @@
+# espanso match file
+
+# For a complete introduction, visit the official docs at: https://espanso.org/docs/
+
+# You can use this file to define the base matches (aka snippets)
+# that will be available in every application when using espanso.
+
+# Matches are substitution rules: when you type the "trigger" string
+# it gets replaced by the "replace" string.
+
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+
+matches:
+  # Simple text replacement
+  - trigger: ":espanso"
+    replace: "Hi there!"
+
+  # Prompts
+  - trigger: ":practice"
+    replace: "Topic: [Enter your topic]
+      I have already studied the theory of this topic.
+
+      Now I want to understand it through hands-on practice, not more theoretical explanations.
+
+      ## Resources
+      Search the web and read and understand the best guides, including these resources :
+      1. Interactive platforms where I can execute commands or code and observe real results.
+      2. GitHub repositories that I can clone and use for hands-on practice.
+      3. High-quality, existing step-by-step tutorials.
+
+      ## Ouput
+      Create a practical tutorial with exercises for me. You can create a lab script that setups the environment and provides exercises for me to practice. The tutorial should be practical, hands-on, and focused on real-world applications of the topic. It should include clear instructions, examples, and exercises that I can follow along with.
+
+      ## Notes for your content quality and selection
+      Prioritize free, high-quality, beginner-accessible resources with real hands-on experience.
+      My goal is to execute, experiment, observe results, and verify that I can apply the topic independently.
+
+      ## Constraints
+      - I have only 30 mins to do the practical not more than that.
+      - It needs to be a quick hands-on practice, not a long course or tutorial.
+      - Possibly a fixed worflow or steps I can follow maybe everytime
+      - Or it can be a tutorial around the main flow instead of covering all the theory and edge cases.
+      - Drill 0 and Drill 1 should be the core and even if I do not have time for the rest of the drills, I should be able to get a good understanding of the topic and be able to apply it in real life.
+
+      ## Fixed Workflow
+      - Other than drills, there needs t o be a fixed workflow or steps I can follow maybe everytime, or it can be a tutorial around the main flow instead of covering all the theory and edge cases. This needs to be the drill 0 or so, and needs to be part of every drill if possible meaning. This depends entirely on the topic. However this is largely true most of the times. So this should be drill 0 and part of each drill and should also come in the response.
+
+      ## User OS
+      - Ask user about his OS at the start before doing anything and make sure the lab script and exercises are compatible with the OS.
+      "
+
+  - trigger: ":onlyplan"
+    replace: "Before you start, list the steps you plan to take, in order, and wait for my go-ahead. Do not begin until I say go."
+
+  - trigger: ":verify"
+    replace: '
+      ## Verification
+      [Verification part given to AI of marking things as unverified]
+      mark anything you could not confirm as "unverified" instead of guessing.
+
+      ## What to check section
+      End with a "What to check" list: only the parts I should verify before using this (figures, dates, prices, calculations, quotes, legal/safety claims, recommendations, anything irreversible). Include an item if its high-stakes, hard to undo, client- or public-facing, or regulated. For each, say why its flagged and how to check it, most important first.'
+
+  - trigger: ":handoff"
+    replace: 'Turn this into a one-page document I could send to a friend who asked me the same question: a two-sentence introduction, the comparison table, the recommendation, and the sources. Make it a file I can download if you can. Keep every "unverified" mark exactly where it is.'
+
+  - trigger: ":abtest"
+    replace: "Give me <N> variants that all fully achieve: <goal>.
+      They must differ in approach, not styling. If renaming or restyling turns
+      one into another, it's not a variant.
+      For each, exactly 4 lines:
+      - Axis: the one decision being varied
+      - Approach: 2–3 lines
+      - Bet: the assumption that must be true for this to win
+      - Wrong if: the observable thing that proves the bet false
+
+      No two variants may share an axis. End with the one cheapest test that
+      kills the most variants. Don't recommend unless I ask."
+
+  - trigger: ":brief"
+    replace: '## Outcome
+      3[number] free online courses [outcome instance] for learning AI agents [purpose], compared, with one recommended for a complete begineer [for audience/audience details].
+
+      ## Context
+      [Place for Personal Constraints]
+      I have never built or used an AI agent [person specific context, weakness or strength], and I do not know how to program. I can study about five hours a week.[Personal Limitation]
+
+      ## Constraints
+      [Place for outcome instance Constraints]
+      only courses that can be started for free, and only courses that do not expect programming knowledge. Search for current information rather than answering from what you already know. [Donot answer from knowledge , answer from current information from web] [All Qualifications mention including Current Web Search]
+
+      ## Authority
+      [Decision Delegation]
+      Choose the sources yourself. If two courses are equal, pick the shorter onw without asking me. Say clearly if a course is paid, or if it expects me to know how to program.[List constraints that already exists for me if any, the constrains that system can exert on me or expects from my side]
+
+      ## Deliverable
+      [Shape and Form of Deliverable]
+      a short table with provider, language, time needed, wether a certificate costs money, and a link. Then a two-sentence recommendation. [Recommendation at the end based on all the sections] [Take it to a form from where verification or handing off becomes easy] Anything that fails a constraint goes lower in the table, labeled with what it breaks.
+
+      ## Verification
+      [Verification part given to AI of marking things as unverified]
+      mark anything you could not confirm as "unverified" instead of guessing.
+
+      ## What to check section
+      End with a "What to check" list: only the parts I should verify before using this (figures, dates, prices, calculations, quotes, legal/safety claims, recommendations, anything irreversible). Include an item if its high-stakes, hard to undo, client- or public-facing, or regulated. For each, say why its flagged and how to check it, most important first.
+      '
+
+  # Git
+  - trigger: ":feat"
+    replace: 'git commit -m "feat(RVS-3232): add role-based access control for admin users"'
+
+  - trigger: ":fix"
+    replace: 'git commit -m "fix(RVS-3233): prevent duplicate records during user registration"'
+
+  - trigger: ":refactor"
+    replace: 'git commit -m "refactor(RVS-3234): simplify authentication token validation logic"'
+
+  - trigger: ":docs"
+    replace: 'git commit -m "docs(RVS-3237): document authentication API endpoints and responses"'
+
+  - trigger: ":test"
+    replace: 'git commit -m "test(RVS-3236): add integration tests for authentication workflow"'
+
+  # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
+
+  # But matches can also be dynamic:
+
+  # Print the current date
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m/%d/%Y"
+
+  # Print the output of a shell command
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo 'Hello from your shell'"
+
+  # And much more! For more information, visit the docs: https://espanso.org/docs/
