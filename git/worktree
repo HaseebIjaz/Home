@@ -1,0 +1,48 @@
+Conventions and Principles
+
+Naming Conventions: Branch name mainn / atta hai aur worktree name mainn - atta hai , branch name: hotfix/typo and worktree name: hotfix-typo
+
+Keep branch and working tree name same
+
+Worktree is a folder.
+Main cheez hai repository [Repo].
+Branch aiik pointer hoti hai towards a commit.
+All Branches belong to the Repo.
+.git folder is git database. It is not recreated for the worktree.
+Branch mainn kamm karnay kay liye checkout karna hai.
+
+Principle 1: Repo mainn Worktrees hotay hainn. Har worktree mainn aik branch checkout hoti hai.
+
+Principle 2: Aikk worktree mainn aikk time par aikk branch hii checkkout hoo sakti hai. New Checkout in another branchh at the same time kay liye aik ne wwork tree banayein aur uss mainn checkout karein.
+
+git worktree add ../dev dev
+specify folder/worktree location and the branch you want to checkout in it
+
+Principle 3: App new worktree bana kar aikk waqt mainn multiple branches par checkkout kar saktay hainn lakin badd mainn unn worktrees koo delete karna hota hai 
+git worktree remove ../dev
+(delete dev folder/worktree)
+
+Note: Basically voo apki repo kaa clone bana kar uss par checkout karwata hai.
+
+
+# 1 CREATE
+git worktree add -b hotfix/typo ../hotfix-typo main
+git worktree list
+
+# 2 SETUP
+cp .env ../app-hotfix-typo
+
+# 3 WORK
+cd ../hotfix-typo                                      
+sed -i 's/Welcom /Welcome /' README.md
+git commit -am "fix: README typo"
+
+# 4 MERGE
+
+cd ../app && git merge hotfix/typo
+
+# REMOVE
+git worktree remove ../hotfix-typo 
+git branch -d hotfix/typo
+git status
+
